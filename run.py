@@ -56,7 +56,7 @@ class ReportButton(discord.ui.Button["Report"]):
 
 class ReportsView(discord.ui.View):
     async def build(self, reports: list):
-        for i, l in enumerate(reports):
+        for i, l in enumerate(reports[:5]):
             b = ReportButton(l.id, f"{i+1}. {l.title}")
             b.row = i
             self.add_item(b)
