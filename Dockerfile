@@ -22,4 +22,4 @@ RUN mkdir -p /app
 COPY . ./app
 WORKDIR /app
 
-CMD [ "python", "run.py" ]
+CMD [ "/opt/venv/bin/python", "run.py" ]
