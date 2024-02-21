@@ -111,7 +111,8 @@ class Report:
                 Fight(f) for f in obj["fights"]
             ]
         if "zone" in obj:
-            self.raid = obj["zone"]["name"]
+            if obj["zone"] is not None:
+                self.raid = obj["zone"]["name"]
 
     def __repr__(self) -> str:
         return f"<Report '{self.title}' -- {self.id}>"
