@@ -128,6 +128,7 @@ async def post_log(ctx: discord.ApplicationContext, optional_url: discord.Option
             else:
                 await ctx.respond("List list", ephemeral=True)
         except APIException as e:
+            print(e)
             await ctx.send_response("Fikk en feil når jeg prøvde å hente rapport...", ephemeral=True)
 
     else:
@@ -135,6 +136,7 @@ async def post_log(ctx: discord.ApplicationContext, optional_url: discord.Option
         try:
             await ap.get_reports()
         except APIException as e:
+            print(e)
             await ctx.send_response("Fikk en feil når jeg prøvde å hente rapporter...", ephemeral=True)
         else:
             if len(ap.reports) > 0:

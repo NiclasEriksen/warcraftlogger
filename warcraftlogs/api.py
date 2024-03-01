@@ -193,7 +193,9 @@ class APIManager:
                 r.from_api_object(data)
                 return r
             else:
+                print(response.content)
                 raise APIException(f"Unable to fetch single report, status code {response.status_code}")
 
         except Exception as e:
+            print(e)
             raise APIException(f"Error during fetching of report: {e}")
