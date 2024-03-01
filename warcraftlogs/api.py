@@ -116,7 +116,7 @@ class Report:
         if "startTime" in obj:
             start_offset = self.get_earliest_start()
             if start_offset is not None:
-                self.start_time = datetime.fromtimestamp(obj["startTime"] / 1000) - start_offset
+                self.start_time = datetime.fromtimestamp(obj["startTime"] / 1000) + start_offset
             else:
                 self.start_time = datetime.fromtimestamp(obj["startTime"] / 1000)
         if "endTime" in obj:
