@@ -50,16 +50,16 @@ class Character:
 
 class Fight:
     name: str = ""
-    start_time: datetime = datetime.now()
-    end_time: datetime = datetime.now()
+    start_time: timedelta = timedelta(seconds=0)
+    end_time: timedelta = timedelta(seconds=0)
 
     def __init__(self, api_obj: dict):
         if "name" in api_obj:
             self.name = api_obj["name"]
         if "startTime" in api_obj:
-            self.start_time = datetime.fromtimestamp(api_obj["startTime"] / 1000)
+            self.start_time = timedelta(seconds=api_obj["startTime"] / 1000)
         if "endTime" in api_obj:
-            self.end_time = datetime.fromtimestamp(api_obj["endTime"] / 1000)
+            self.end_time = timedelta(seconds=api_obj["end_time"] / 1000)
 
     @property
     def duration(self) -> timedelta:
@@ -91,13 +91,9 @@ class Report:
     def duration_str(self) -> str:
         return sec_to_str(self.duration.seconds)
 
-    def get_earliest_start(self) -> Union[datetime, None]:
+    def get_earliest_start(self) -> Union[timedelta, None]:
         earliest = None
         for f in self.fights:
-            print("=====")
-            print(f.name)
-            print(f.start_time)
-            print("=====")
             if earliest is None or f.start_time < earliest:
                 earliest = f.start_time
         return earliest
@@ -117,11 +113,12 @@ class Report:
             self.fights = [
                 Fight(f) for f in obj["fights"]
             ]
-        self.start_time = self.get_earliest_start()
-        print(self.start_time)
-        if "startTime" in obj and self.start_time is None:
-            self.start_time = datetime.fromtimestamp(obj["startTime"] / 1000)
-            print(self.start_time)
+        if "startTime" in obj:
+            start_offset = self.get_earliest_start()
+            if start_offset is not None:
+                self.start_time = datetime.fromtimestamp(obj["startTime"] / 1000) - start_offset
+            else:
+                self.start_time = datetime.fromtimestamp(obj["startTime"] / 1000)
         if "endTime" in obj:
             self.end_time = datetime.fromtimestamp(obj["endTime"] / 1000)
         if "zone" in obj:
