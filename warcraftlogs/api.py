@@ -114,8 +114,10 @@ class Report:
                 Fight(f) for f in obj["fights"]
             ]
         self.start_time = self.get_earliest_start()
+        print(self.start_time)
         if "startTime" in obj and self.start_time is None:
             self.start_time = datetime.fromtimestamp(obj["startTime"] / 1000)
+            print(self.start_time)
         if "endTime" in obj:
             self.end_time = datetime.fromtimestamp(obj["endTime"] / 1000)
         if "zone" in obj:
