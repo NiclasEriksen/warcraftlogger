@@ -91,15 +91,18 @@ class Report:
     def duration_str(self) -> str:
         return sec_to_str(self.duration.seconds)
 
+    def get_earliest_start(self) -> Union[datetime, None]:
+        earliest = None
+        for f in self.fights:
+            if earliest is None or f.start_time < earliest:
+                earliest = f.start_time
+        return earliest
+
     def from_api_object(self, obj: dict):
         if "code" in obj:
             self.id = obj["code"]
         if "title" in obj:
             self.title = obj["title"]
-        if "startTime" in obj:
-            self.start_time = datetime.fromtimestamp(obj["startTime"] / 1000)
-        if "endTime" in obj:
-            self.end_time = datetime.fromtimestamp(obj["endTime"] / 1000)
         if "segments" in obj:
             self.segment_count = obj["segments"]
         if "rankedCharacters" in obj:
@@ -110,6 +113,11 @@ class Report:
             self.fights = [
                 Fight(f) for f in obj["fights"]
             ]
+        self.start_time = self.get_earliest_start()
+        if "startTime" in obj and self.start_time is None:
+            self.start_time = datetime.fromtimestamp(obj["startTime"] / 1000)
+        if "endTime" in obj:
+            self.end_time = datetime.fromtimestamp(obj["endTime"] / 1000)
         if "zone" in obj:
             if obj["zone"] is not None:
                 self.raid = obj["zone"]["name"]
