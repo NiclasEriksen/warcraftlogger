@@ -94,6 +94,10 @@ class Report:
     def get_earliest_start(self) -> Union[datetime, None]:
         earliest = None
         for f in self.fights:
+            print("=====")
+            print(f.name)
+            print(f.start_time)
+            print("=====")
             if earliest is None or f.start_time < earliest:
                 earliest = f.start_time
         return earliest
