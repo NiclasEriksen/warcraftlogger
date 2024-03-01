@@ -59,7 +59,7 @@ class Fight:
         if "startTime" in api_obj:
             self.start_time = timedelta(seconds=api_obj["startTime"] / 1000)
         if "endTime" in api_obj:
-            self.end_time = timedelta(seconds=api_obj["end_time"] / 1000)
+            self.end_time = timedelta(seconds=api_obj["endTime"] / 1000)
 
     @property
     def duration(self) -> timedelta:
