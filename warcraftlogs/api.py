@@ -99,6 +99,7 @@ class Report:
         return earliest
 
     def from_api_object(self, obj: dict):
+        print(obj)
         if "code" in obj:
             self.id = obj["code"]
         if "title" in obj:
