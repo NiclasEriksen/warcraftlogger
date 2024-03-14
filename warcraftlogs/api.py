@@ -82,6 +82,9 @@ class Report:
     characters: list = []
     fights: list = []
     raid: str = ""
+    deaths: int = 0
+    execution_rank: int = 0
+    speed_rank: int = 0
 
     @property
     def duration(self) -> timedelta:
@@ -105,6 +108,19 @@ class Report:
                 latest = f.end_time
         return latest
 
+    def get_rankings_from_data(self, data: dict):
+        full_raid = None
+        try:
+            for encounter in data:
+                if encounter["encounter"]["name"] == self.raid:
+                    full_raid = encounter
+                    break
+            if full_raid is not None:
+                self.speed_rank = full_raid["speed"]["rankPercent"]
+                self.execution_rank = full_raid["execution"]["rankPercent"]
+        except KeyError as e:
+            print(e)
+
     def from_api_object(self, obj: dict):
         print(obj)
         if "code" in obj:
@@ -121,6 +137,9 @@ class Report:
             self.fights = [
                 Fight(f) for f in obj["fights"]
             ]
+        if "zone" in obj:
+            if obj["zone"] is not None:
+                self.raid = obj["zone"]["name"]
         if "startTime" in obj:
             start_offset = self.get_earliest_start()
             end_offset = self.get_latest_end()
@@ -134,6 +153,8 @@ class Report:
         if "zone" in obj:
             if obj["zone"] is not None:
                 self.raid = obj["zone"]["name"]
+            if "rankings" in obj:
+                self.get_rankings_from_data(obj["rankings"]["data"])
 
     def __repr__(self) -> str:
         return f"<Report '{self.title}' -- {self.id}>"
