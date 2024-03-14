@@ -21,9 +21,7 @@ query($report_id:String){
                 startTime,
                 endTime
             },
-            rankings(
-                
-            )
+            rankings
         }
     }
 }"""
