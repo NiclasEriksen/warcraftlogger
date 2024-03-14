@@ -20,7 +20,10 @@ query($report_id:String){
                 name,
                 startTime,
                 endTime
-            }
+            },
+            rankings(
+                
+            )
         }
     }
 }"""
