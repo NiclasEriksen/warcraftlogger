@@ -118,9 +118,12 @@ class Report:
                 else:
                     print(encounter["encounter"]["name"], "  ", self.raid)
             if full_raid is not None:
+                print(full_raid)
                 self.speed_rank = full_raid["speed"]["rankPercent"]
                 self.execution_rank = full_raid["execution"]["rankPercent"]
                 self.deaths = full_raid["deaths"]
+            else:
+                print("NO FULL RAID")
         except KeyError as e:
             print(e)
 
