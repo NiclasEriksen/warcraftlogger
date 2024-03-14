@@ -98,6 +98,13 @@ class Report:
                 earliest = f.start_time
         return earliest
 
+    def get_latest_end(self) -> Union[timedelta, None]:
+        latest = None
+        for f in self.fights:
+            if latest is None or f.end_time > latest:
+                latest = f.end_time
+        return latest
+
     def from_api_object(self, obj: dict):
         print(obj)
         if "code" in obj:
@@ -116,12 +123,14 @@ class Report:
             ]
         if "startTime" in obj:
             start_offset = self.get_earliest_start()
+            end_offset = self.get_latest_end()
             if start_offset is not None:
                 self.start_time = datetime.fromtimestamp(obj["startTime"] / 1000) + start_offset
+                self.end_time = datetime.fromtimestamp(obj["startTime"] / 1000) + end_offset
             else:
                 self.start_time = datetime.fromtimestamp(obj["startTime"] / 1000)
-        if "endTime" in obj:
-            self.end_time = datetime.fromtimestamp(obj["endTime"] / 1000)
+                if "endTime" in obj:
+                    self.end_time = datetime.fromtimestamp(obj["endTime"] / 1000)
         if "zone" in obj:
             if obj["zone"] is not None:
                 self.raid = obj["zone"]["name"]
