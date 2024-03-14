@@ -115,10 +115,7 @@ class Report:
                 if encounter["encounter"]["name"] == self.raid:
                     full_raid = encounter
                     break
-                else:
-                    print(encounter["encounter"]["name"], "  ", self.raid)
             if full_raid is not None:
-                print(full_raid)
                 self.speed_rank = full_raid["speed"]["rankPercent"]
                 self.execution_rank = full_raid["execution"]["rankPercent"]
                 self.deaths = full_raid["deaths"]
@@ -128,7 +125,6 @@ class Report:
             print(e)
 
     def from_api_object(self, obj: dict):
-        print(obj)
         if "code" in obj:
             self.id = obj["code"]
         if "title" in obj:
