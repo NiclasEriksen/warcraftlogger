@@ -99,7 +99,7 @@ async def get_report_embed(report: Report) -> discord.Embed:
     if report.speed_rank > 0:
         msg += f"Deaths: **{report.deaths}**\n\n"
     else:
-        msg += f"*Report only contain kills, not full raid*\n"
+        msg += f"*Limited report, only kills*\n"
     if report.speed_rank > 0:
         msg += f"Speed %: **{report.speed_rank}**\n"
     if report.execution_rank > 0:
