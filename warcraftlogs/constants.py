@@ -17,7 +17,8 @@ except TypeError:
 
 
 CLASS_NAME = {
-    0: "Warrior",
+    0: "Unknown",
+    1: "Paladin",
     2: "Druid",
     3: "Hunter",
     4: "Mage",

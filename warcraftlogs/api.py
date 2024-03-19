@@ -32,6 +32,7 @@ class Character:
     name: str = ""
     player_class_id: int = -1
 
+
     def __init__(self, api_obj: dict):
         if "name" in api_obj:
             self.name = api_obj["name"]

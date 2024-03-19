@@ -13,7 +13,8 @@ query($report_id:String){
             },
             rankedCharacters{
                 classID,
-                name
+                name,
+                gameData
             },
             fights(killType: Kills){
                 kill,
