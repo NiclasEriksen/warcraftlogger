@@ -142,6 +142,14 @@ class Report:
             self.characters = [
                 Character(c) for c in obj["rankedCharacters"]
             ]
+            if "masterData" in obj:
+                if "actors" in obj["masterData"]:
+                    for c in self.characters:
+                        if c.player_class_id == 0:
+                            actor = None
+                            for a in obj["masterData"]["actors"]:
+                                c.player_class_id = lookup_class_id(a["subType"])
+
         if "fights" in obj:
             self.fights = [
                 Fight(f) for f in obj["fights"]
@@ -164,8 +172,6 @@ class Report:
                 self.raid = obj["zone"]["name"]
             if "rankings" in obj:
                 self.get_rankings_from_data(obj["rankings"]["data"])
-        if "masterData" in obj:
-            print(obj["masterData"])
 
     def __repr__(self) -> str:
         return f"<Report '{self.title}' -- {self.id}>"

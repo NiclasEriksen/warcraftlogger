@@ -30,5 +30,12 @@ CLASS_NAME = {
 }
 
 
+def lookup_class_id(class_name: str) -> int:
+    for i, name in CLASS_NAME.items():
+        if name.lower() == class_name.lower():
+            return i
+    return -1
+
+
 WARCRAFT_LOGS_AUTH_URL = "https://www.warcraftlogs.com/oauth/token"
 WARCRAFT_LOGS_API_URL = "https://www.warcraftlogs.com/api/v2/client"
