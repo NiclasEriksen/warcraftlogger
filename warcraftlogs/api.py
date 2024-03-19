@@ -44,6 +44,7 @@ class Character:
     @property
     def player_class(self) -> str:
         if self.player_class_id in CLASS_NAME:
+            print(f"{self.name}: {self.player_class_id}, {CLASS_NAME[self.player_class_id]}")
             return CLASS_NAME[self.player_class_id]
         return "UNKNOWN CLASS ID: " + str(self.player_class_id)
 
