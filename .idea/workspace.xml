@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e304c7a0-7bb2-46c5-bbfc-7dc4d5218bb6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/warcraftlogs/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/warcraftlogs/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warcraftlogs/query.py" beforeDir="false" afterPath="$PROJECT_DIR$/warcraftlogs/query.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
