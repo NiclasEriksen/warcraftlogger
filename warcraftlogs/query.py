@@ -23,7 +23,7 @@ query($report_id:String){
             },
             rankings,
             masterData{
-                actors(type: 'Player'){
+                actors(type: "Player"){
                     name,
                     type,
                     subType,
