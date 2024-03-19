@@ -38,8 +38,6 @@ class Character:
             self.name = api_obj["name"]
         if "classID" in api_obj:
             self.player_class_id = api_obj["classID"]
-            if self.player_class_id == 0:
-                print(api_obj)
         else:
             print("classID not in api_obj")
             print(api_obj)
@@ -47,7 +45,6 @@ class Character:
     @property
     def player_class(self) -> str:
         if self.player_class_id in CLASS_NAME:
-            print(f"{self.name}: {self.player_class_id}, {CLASS_NAME[self.player_class_id]}")
             return CLASS_NAME[self.player_class_id]
         return "UNKNOWN CLASS ID: " + str(self.player_class_id)
 
@@ -152,7 +149,7 @@ class Report:
                                     actor = a
                                     break
                             if actor is not None:
-                                print(f"Updating {c.name}")
+                                print(f"Updating {c.name}'s class name (class id 0)")
                                 c.player_class_id = lookup_class_id(actor["subType"])
 
         if "fights" in obj:
