@@ -148,7 +148,12 @@ class Report:
                         if c.player_class_id == 0:
                             actor = None
                             for a in obj["masterData"]["actors"]:
-                                c.player_class_id = lookup_class_id(a["subType"])
+                                if a["name"] == c.name:
+                                    actor = a
+                                    break
+                            if actor is not None:
+                                print(f"Updating {c.name}")
+                                c.player_class_id = lookup_class_id(actor["subType"])
 
         if "fights" in obj:
             self.fights = [
