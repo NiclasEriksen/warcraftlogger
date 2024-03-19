@@ -13,8 +13,7 @@ query($report_id:String){
             },
             rankedCharacters{
                 classID,
-                name,
-                gameData
+                name
             },
             fights(killType: Kills){
                 kill,
@@ -22,7 +21,14 @@ query($report_id:String){
                 startTime,
                 endTime
             },
-            rankings
+            rankings,
+            masterData{
+                actors{
+                    name,
+                    type,
+                    subType,
+                }
+            }
         }
     }
 }"""

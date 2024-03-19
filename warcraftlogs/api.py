@@ -164,6 +164,7 @@ class Report:
                 self.raid = obj["zone"]["name"]
             if "rankings" in obj:
                 self.get_rankings_from_data(obj["rankings"]["data"])
+        if "masterData" in obj:
 
     def __repr__(self) -> str:
         return f"<Report '{self.title}' -- {self.id}>"
