@@ -165,6 +165,7 @@ class Report:
             if "rankings" in obj:
                 self.get_rankings_from_data(obj["rankings"]["data"])
         if "masterData" in obj:
+            print(obj["masterData"])
 
     def __repr__(self) -> str:
         return f"<Report '{self.title}' -- {self.id}>"
