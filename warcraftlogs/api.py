@@ -37,6 +37,9 @@ class Character:
             self.name = api_obj["name"]
         if "classID" in api_obj:
             self.player_class_id = api_obj["classID"]
+        else:
+            print("classID not in api_obj")
+            print(api_obj)
 
     @property
     def player_class(self) -> str:
@@ -187,11 +190,14 @@ class APIManager:
 
     async def get_reports(self):
         variables = {"guild_id": GUILD_ID}
-        response = requests.get(
-            url=WARCRAFT_LOGS_API_URL,
-            json={"query": reports_query, "variables": variables},
-            headers=self.headers
-        )
+        try:
+            response = requests.get(
+                url=WARCRAFT_LOGS_API_URL,
+                json={"query": reports_query, "variables": variables},
+                headers=self.headers
+            )
+        except Exception as e:
+            raise APIException(f"Unable to fetch reports, undefined error.")
         if response.status_code == 200:
             try:
                 data = response.json()["data"]["reportData"]["reports"]["data"]

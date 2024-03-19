@@ -146,6 +146,9 @@ async def post_log(ctx: discord.ApplicationContext, optional_url: discord.Option
         except APIException as e:
             print(e)
             await ctx.send_response("Fikk en feil når jeg prøvde å hente rapporter...", ephemeral=True)
+        except Exception as e:
+            print(e)
+            await ctx.send_response("Fikk udefinert feil når jeg prøvde hente den rapporten... Spør \"Hjelp\"", ephemeral=True)
         else:
             if len(ap.reports) > 0:
                 await v.build([r for k, r in ap.reports.items()])
