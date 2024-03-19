@@ -37,6 +37,8 @@ class Character:
             self.name = api_obj["name"]
         if "classID" in api_obj:
             self.player_class_id = api_obj["classID"]
+            if self.player_class_id == 0:
+                print(api_obj)
         else:
             print("classID not in api_obj")
             print(api_obj)
